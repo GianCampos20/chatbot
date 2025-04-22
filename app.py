@@ -20,8 +20,6 @@ def get_bot_response(message):
      
      if not response.status_code == 200:
          
-        print(f"Error: {response.status_code}, Response: {response.text}")
-    
         return "Error en la respuesta del bot"
         
      return response.json()["choices"][0]["message"]["content"]
@@ -35,6 +33,15 @@ def send():
     user_message = request.json.get("message")
     bot_response = get_bot_response(user_message)
     return jsonify({"response" : bot_response})
+
+@app.route("/test-connection", methods=["GET"])
+def test_connection():
+    try:
+        response = requests.get("https://httpbin.org/get")
+        return jsonify({"status": "success", "data": response.json()})
+    except requests.exceptions.RequestException as e:
+        return jsonify({"status": "error", "error": str(e)})
+
 
 
 if __name__ == "__main__":
