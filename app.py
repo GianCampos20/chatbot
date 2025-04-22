@@ -19,6 +19,8 @@ def get_bot_response(message):
      response = requests.post(f"{OPENROUTER_BASE_URL}/chat/completions", headers=headers, json=data)
      
      if not response.status_code == 200:
+         
+        print(f"Error: {response.status_code}, Response: {response.text}")
     
         return "Error en la respuesta del bot"
         
