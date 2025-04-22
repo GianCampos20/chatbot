@@ -5,7 +5,15 @@ from src.Router import Router
 from src.Header import Header
 from src.Data_Bot import Data_Bot
 import logging
+import sys
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 app = Flask(__name__)
 
 OPENROUTER_API_KEY = Router.returnApiKey()
