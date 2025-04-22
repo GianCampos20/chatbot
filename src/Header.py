@@ -7,6 +7,6 @@ class Header:
         return {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer" : "http://localhost:5000",
+        "Referer" : "http://localhost:5000",
         "X-Title" : "Mi Chatbot Flask"
         }
