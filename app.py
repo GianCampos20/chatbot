@@ -42,6 +42,14 @@ def test_connection():
     except requests.exceptions.RequestException as e:
         return jsonify({"status": "error", "error": str(e)})
 
+@app.route("/test-openrouter", methods=["GET"])
+def test_openrouter_connection():
+    try:
+        response = requests.get("https://openrouter.ai/api/v1")
+        return jsonify({"status": "success", "data": response.json()})
+    except requests.exceptions.RequestException as e:
+        return jsonify({"status": "error", "error": str(e)})
+
 
 
 if __name__ == "__main__":
