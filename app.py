@@ -4,6 +4,7 @@ import os
 from src.Router import Router
 from src.Header import Header
 from src.Data_Bot import Data_Bot
+import logging
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ OPENROUTER_BASE_URL = Router.baseUrl()
 
 def get_bot_response(message):
     
-     print("Llego la solicitud al backensd!!!!!!")
+     logging.info("Llego la solicitud al backensd!!!!!!")
      
      headers = Header.get_headers()
      
@@ -21,6 +22,8 @@ def get_bot_response(message):
      response = requests.post(f"{OPENROUTER_BASE_URL}/chat/completions", headers=headers, json=data)
      
      if not response.status_code == 200:
+         
+        logging.error(f"Error response: {response.text}")
          
         return "Error en la respuesta del bot"
         
