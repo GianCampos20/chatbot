@@ -11,6 +11,8 @@ OPENROUTER_API_KEY = Router.returnApiKey()
 OPENROUTER_BASE_URL = Router.baseUrl()
 
 def get_bot_response(message):
+    
+     print("Llego la solicitud al backensd!!!!!!")
      
      headers = Header.get_headers()
      
