@@ -36,23 +36,6 @@ def send():
     bot_response = get_bot_response(user_message)
     return jsonify({"response" : bot_response})
 
-@app.route("/test-connection", methods=["GET"])
-def test_connection():
-    try:
-        response = requests.get("https://httpbin.org/get")
-        return jsonify({"status": "success", "data": response.json()})
-    except requests.exceptions.RequestException as e:
-        return jsonify({"status": "error", "error": str(e)})
-
-@app.route("/test-openrouter", methods=["GET"])
-def test_openrouter_connection():
-    try:
-        response = requests.get("https://openrouter.ai/api/v1")
-        return jsonify({"status": "success", "data": response.json()})
-    except requests.exceptions.RequestException as e:
-        return jsonify({"status": "error", "error": str(e)})
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
