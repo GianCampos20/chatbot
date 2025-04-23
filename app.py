@@ -64,6 +64,17 @@ def test_connection():
     except requests.exceptions.RequestException as e:
         logging.error(f"Error en test-connection: {e}")
         return jsonify({"status": "error", "error": str(e)})
+    
+
+@app.route("/check-api-key", methods=["GET"])
+def check_api_key():
+    api_key = Router.returnApiKey()
+    
+    if not api_key:
+        return jsonify({"status": "error", "message": "API key is missing"}), 500
+    
+    return jsonify({"status": "success", "message": "API key is set ✅", "key_preview": api_key[:6] + "..."})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
