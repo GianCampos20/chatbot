@@ -1,14 +1,17 @@
-from src.Router import Router
 import os
+
 class Header:
     def get_headers():
-        # OPENROUTER_API_KEY = Router.returnApiKey()
+        # Usamos la variable de entorno para obtener la API Key
+        OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+
+        # Verificamos si la API key está disponible
+        if OPENROUTER_API_KEY is None:
+            raise ValueError("La API key no está configurada en las variables de entorno.")
         
-        referer = os.environ.get("REFERER", "http://localhost:5000")
-    
         return {
-        "Authorization": "Bearer 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",
-        "Content-Type": "application/json",
-        "Referer" : referer,
-        "X-Title" : "Mi Chatbot Flask"
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Content-Type": "application/json",
+            "Referer": "https://chatbot-l99s.onrender.com",
+            "X-Title": "Mi Chatbot Flask"
         }
