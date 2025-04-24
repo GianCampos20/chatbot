@@ -6,5 +6,7 @@ class Header:
         print("🧪 Usando API Key:", api_key[:10] + "...")  # para debug
         return {
             "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Referer": "https://chatbot-l99s.onrender.com",  # Cambia por tu dominio real
+            "X-Title": "Mi Chatbot Flask"
         }
