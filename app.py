@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 # Configurar logs para Render (stdout)
 logging.basicConfig(
     level=logging.INFO,
