@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 
-print("OPENROUTER_API_KEY:", os.getenv("OPENROUTER_API_KEY"))
 # Configurar logs para Render (stdout)
 logging.basicConfig(
     level=logging.INFO,
@@ -22,14 +21,8 @@ app = Flask(__name__)
 OPENROUTER_BASE_URL = Router.baseUrl()
 
 def get_bot_response(message):
+    
     headers = Header.get_headers()
-    print("---------------------------------")
-    print("Headers que se estan usando: ")
-    print(headers)
-    print("---------------------------------")
-    print("---------------------------------")
-    print(OPENROUTER_BASE_URL)
-    print("---------------------------------")
     data = Data_Bot.get_data(message)
 
     try:
@@ -38,20 +31,15 @@ def get_bot_response(message):
             headers=headers,
             json=data
         )
-        logging.info(f"Response status code: {response.status_code}")
-        logging.info(f"Response text: {response.text}")
     except requests.exceptions.RequestException as e:
-        logging.error(f"Request error: {e}")
         return "Error al enviar la solicitud"
 
     if response.status_code != 200:
-        logging.error(f"Error en la respuesta del bot: {response.text}")
         return "Error en la respuesta del bot"
 
     try:
         return response.json()["choices"][0]["message"]["content"]
     except ValueError as e:
-        logging.error(f"Error al procesar JSON: {e}")
         return "Error al procesar la respuesta del bot"
 
 @app.route("/")
@@ -63,27 +51,6 @@ def send():
     user_message = request.json.get("message")
     bot_response = get_bot_response(user_message)
     return jsonify({"response": bot_response})
-
-# Ruta de prueba de conexión
-@app.route("/test-connection", methods=["GET"])
-def test_connection():
-    try:
-        response = requests.get("https://httpbin.org/get")
-        return jsonify({"status": "success", "data": response.json()})
-    except requests.exceptions.RequestException as e:
-        logging.error(f"Error en test-connection: {e}")
-        return jsonify({"status": "error", "error": str(e)})
-    
-
-@app.route("/check-api-key", methods=["GET"])
-def check_api_key():
-    api_key = Router.returnApiKey()
-    
-    if not api_key:
-        return jsonify({"status": "error", "message": "API key is missing"}), 500
-    
-    return jsonify({"status": "success", "message": "API key is set ✅", "key_preview": api_key[:6] + "..."})
-
 
 if __name__ == "__main__":
     app.run(debug=True)
