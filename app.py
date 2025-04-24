@@ -6,9 +6,10 @@ from src.Router import Router
 from src.Header import Header
 from src.Data_Bot import Data_Bot
 from dotenv import load_dotenv
-
 load_dotenv()
+import os
 
+print("OPENROUTER_API_KEY:", os.getenv("OPENROUTER_API_KEY"))
 # Configurar logs para Render (stdout)
 logging.basicConfig(
     level=logging.INFO,
@@ -22,6 +23,12 @@ OPENROUTER_BASE_URL = Router.baseUrl()
 
 def get_bot_response(message):
     headers = Header.get_headers()
+    print("---------------------------------")
+    print(headers)
+    print("---------------------------------")
+    print("---------------------------------")
+    print(OPENROUTER_BASE_URL)
+    print("---------------------------------")
     data = Data_Bot.get_data(message)
 
     try:
