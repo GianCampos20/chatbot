@@ -24,6 +24,7 @@ OPENROUTER_BASE_URL = Router.baseUrl()
 def get_bot_response(message):
     headers = Header.get_headers()
     print("---------------------------------")
+    print("Headers que se estan usando: ")
     print(headers)
     print("---------------------------------")
     print("---------------------------------")
