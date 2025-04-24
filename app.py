@@ -2,10 +2,13 @@ from flask import Flask, render_template, request, jsonify
 import requests
 import logging
 import sys
-
 from src.Router import Router
 from src.Header import Header
 from src.Data_Bot import Data_Bot
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Configurar logs para Render (stdout)
 logging.basicConfig(
