@@ -6,9 +6,8 @@ class Router:
     
     @staticmethod
     def returnApiKey():
-        load_dotenv()  # Asegúrate de que las variables se carguen antes de acceder a ellas
+        load_dotenv()
         api_key = os.getenv("OPENROUTER_API_KEY")
-        print(f"API Key cargada: {api_key}")  # Verifica si el valor es el esperado
         return api_key
     
     @staticmethod
