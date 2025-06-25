@@ -35,6 +35,8 @@ def get_bot_response(message):
         return "Error al enviar la solicitud"
 
     if response.status_code != 200:
+        print("Codigo de estado: ", response.status_code)
+        print("Respuesta: ", response.text)
         return "Error en la respuesta del bot"
 
     try:
